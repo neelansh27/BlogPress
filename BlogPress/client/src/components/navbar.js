@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
 
 function Navbar() {
   return (
-    <div>Navbar</div>
-  )
+    <header>
+      <nav>
+        <ul>
+          <li>BlogPress</li>
+          <li>Search</li>
+        </ul>
+      </nav>
+    </header>
+  );
 }
 
-export default Navbar
+export default Navbar;

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-
+const path = require("path");
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  profilePic: Buffer,
+  profilePic: {type: String, default:`${path.join(__dirname,'../static/default.jpg')}`},
 });
 
 const commentSchema = new mongoose.Schema({

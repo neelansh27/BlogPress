@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar'  
+import Post from './components/post';
 function App() {
   return (
     <div >
-      <header >
         <Navbar/>
-      </header>
+        <Post />
     </div>
   );
 }
