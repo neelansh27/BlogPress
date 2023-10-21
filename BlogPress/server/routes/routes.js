@@ -52,7 +52,7 @@ router.post("/post/add", (req, res) => {
 });
 
 router.get("/post/getposts", (req, res) => {
-  Posts.find({}, "-author_id -__v")
+  Posts.find({"title": {"$regex": (req.query.search || ""),$options: 'i'}}, "-author_id -__v")
       .sort({createdAt : -1})
       .skip(5 * (req.query.page - 1 || 0))
       .limit(5)

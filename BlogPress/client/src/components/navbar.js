@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom"
 function Navbar() {
   return (
@@ -6,7 +6,6 @@ function Navbar() {
       <nav>
         <ul>
           <li><Link to="/">BlogPress</Link></li>
-          <li><input type="text" name="search" /> <button>O</button></li>
         </ul>
       </nav>
     </header>
