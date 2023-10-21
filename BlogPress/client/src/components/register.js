@@ -5,7 +5,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [response, setresponse] = useState("")
+  const [response, setresponse] = useState("");
   const handleName = (e) => {
     setUsername(e.target.value);
   };
@@ -29,18 +29,21 @@ function Register() {
         email: email,
         password: password,
       }),
-    }).then((res) => {
-        return res.json()
-    }).then((data)=>{
-        setresponse(data.message)
-    }).catch((err)=>{
-      console.log(err)
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setresponse(data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <form onSubmit={handleSubmit}>
       <h1>Register</h1>
-      {!response || response}    
+      {!response || response}
       <div>
         <label htmlFor="username">Name</label>
         <input

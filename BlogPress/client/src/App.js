@@ -6,8 +6,10 @@ import PostView from './components/PostView';
 import {BrowserRouter as  Router,Routes,Route, Outlet} from "react-router-dom"
 import Register from './components/register';
 import Login from './components/login';
+import {AuthProviderWrapper} from "./context/auth.context"
 function App() {
   return (
+    <AuthProviderWrapper>
     <Router>
         <Routes>
             <Route element={<WithoutNav/>}>
@@ -18,9 +20,9 @@ function App() {
           <Route path="/" element={<Post/>} />
           <Route path="/post/:id" element={<PostView/>} />
           </Route>
-
         </Routes>
     </Router>
+    </AuthProviderWrapper>
   );
 }
 

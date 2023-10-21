@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {Link} from "react-router-dom"
+import {AuthContext} from "../context/auth.context"
 
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-
+  const [response, setresponse] = useState("")
+  const { storeItems } = useContext(AuthContext);
   const handleEmail = (e) => {
     setemail(e.target.value);
   };
@@ -24,11 +26,15 @@ function Login() {
         email: email,
         password: password,
       }),
-    }).then((res) => console.log(res));
+    }).then((res) => res.json()).then((data)=>{
+      storeItems(data.token);
+      setresponse(data.message);
+    });
   };
   return (
     <form onSubmit={handleSubmit}>
     <h1>Login</h1>
+    { !response || response}
       <div>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />

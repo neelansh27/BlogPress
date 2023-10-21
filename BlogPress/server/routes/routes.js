@@ -4,6 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { User, Posts } = require("../schema/models");
 const jwt = require("jsonwebtoken")
+const isAuthenticated = require("../middlewares/jwt.middleware");
 
 mongoose
   .connect(process.env.DB_URI, {
@@ -49,7 +50,10 @@ router.post("/login", (req, res) => {
         email: entry.email,
         id: entry._id,
       };
-      const token = jwt.sign(payload,process.env.SECRET);
+      const token = jwt.sign(payload,process.env.SECRET,{
+        algorithm: "HS256",
+        expiresIn: "1h",
+      });
       return res.json({ token: token});
     }
   );
@@ -124,4 +128,7 @@ router.post("/comment/add", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/verify",isAuthenticated,(req,res)=>{
+  res.status(200).json(req.user);
+})
 module.exports = router;
