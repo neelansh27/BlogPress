@@ -1,12 +1,12 @@
 import React from "react";
-
+import {Link} from "react-router-dom"
 function Navbar() {
   return (
     <header>
       <nav>
         <ul>
-          <li>BlogPress</li>
-          <li>Search</li>
+          <li><Link to="/">BlogPress</Link></li>
+          <li><input type="text" name="search" /> <button>O</button></li>
         </ul>
       </nav>
     </header>
