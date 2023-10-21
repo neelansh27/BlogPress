@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const { User, Posts } = require("../schema/models");
+const jwt = require("jsonwebtoken")
 
 mongoose
   .connect(process.env.DB_URI, {
@@ -31,9 +32,27 @@ router.post("/register", (req, res) => {
       })
       .catch((err) => {
         console.log(err);
-        return res.json({message: err});
+        return res.json({ message: err });
       });
   });
+});
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  User.findOne({ $and: [{ email: email }, { password: password }] }).then(
+    (entry) => {
+      if (!entry) {
+        return res.status(400).json({ message: "Please Check Credentials" });
+      }
+      const payload ={
+        name: entry.username,
+        email: entry.email,
+        id: entry._id,
+      };
+      const token = jwt.sign(payload,process.env.SECRET);
+      return res.json({ token: token});
+    }
+  );
 });
 
 // Using user Id to add posts
@@ -60,6 +79,7 @@ router.post("/post/add", (req, res) => {
     })
     .catch((err) => res.json(err));
 });
+
 router.post("/login", (req, res) => {
   res.send(req.body);
 });
@@ -103,4 +123,5 @@ router.post("/comment/add", (req, res) => {
     })
     .catch((err) => res.json(err));
 });
+
 module.exports = router;
