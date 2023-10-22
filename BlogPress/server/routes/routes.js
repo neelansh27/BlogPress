@@ -95,8 +95,9 @@ router.get("/post/getposts", (req, res) => {
     .sort({ createdAt: -1 })
     .skip(6 * (req.query.page - 1 || 0))
     .limit(6)
-    .then((posts) => {
-      res.json(posts);
+    .then(async (posts) => {
+      const count= await Posts.countDocuments()
+      res.json({posts:posts,count:count});
     })
     .catch((err) => {
       res.json(err);
@@ -105,8 +106,6 @@ router.get("/post/getposts", (req, res) => {
 router.get("/post/user/:id", (req, res) => {
   Posts.find({author_id: req.params.id},"-author_id -__v")
     .sort({ createdAt: -1 })
-    .skip(6 * (req.query.page - 1 || 0))
-    .limit(6)
     .then((posts) => {
       res.json(posts);
     })
