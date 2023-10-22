@@ -1,6 +1,7 @@
 import React,{ useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../context/auth.context";
+import "../css/createPost.css"
 
 function CreatePost() {
   const [title, setTitle] = useState("");
@@ -32,14 +33,18 @@ function CreatePost() {
   };
   return (
     <main>
-      <h1>Create Post</h1>
-      <div>
-        <input type="text" onChange={handleTitle} value={title} />
+      <h1 className="cp-title">Create Post</h1>
+    <div className="cp-container">
+    <div className="cp-box">
+      <div className="cp-input">
+        <input type="text" className="cp-heading" onChange={handleTitle} value={title} />
       </div>
       <div>
-        <textarea value={content} onChange={handleContent}></textarea>
+        <textarea value={content} className="cp-content" onChange={handleContent}></textarea>
       </div>
-      <button onClick={handleSubmit}> Post </button>
+      <button onClick={handleSubmit} className="cp-btn"> Post </button>
+</div>
+</div>
     </main>
   );
 }
