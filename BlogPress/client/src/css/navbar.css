@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
+nav{
+  padding: 10px 0px;
+  background-color: #F2F1F4;
+  position: fixed;
+  width: 100vw;
+  height: 5vh;
+  z-index: 999;
+  margin-bottom: 5vh;
+}
+nav ul{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0px 15px 0px 0px;
+}
+
+nav ul li .anchor {
+  text-decoration: none;
+  color: #333238;
+}
+
+nav ul li:nth-child(1){
+  font-family: 'Playfair Display', serif;
+  margin-right: auto;
+  font-size: 1.5rem !important;
+}
+nav ul li .anchor:hover {
+  text-decoration: underline;
+}
+
+nav ul li button {
+  border: 0px;
+  background-color: none;
+  font-size: 10px;
+}
