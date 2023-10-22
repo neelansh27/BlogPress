@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
+import "../css/profile.css"
 const Profile = () => {
   const [userPosts, setUserPosts] = useState(null);
   const { user } = useContext(AuthContext);
@@ -9,34 +10,37 @@ const Profile = () => {
       .then((res) => res.json())
       .then((res) => {
           setUserPosts(res);
-        console.log(userPosts);
       })
       .catch((err) => console.log(err));
   }, [user.id]);
   return (
-    <div>
+    <main>
+    <div className="user-details">
       <div className="profile">
-        <div>Name</div>
-        <div>{user.name}</div>
-        <div>Email</div>
+        <div className="label row-1" >Name</div>
+        <div className="row-1">{user.name}</div>
+        <div className="label">Email</div>
         <div>{user.email}</div>
       </div>
     <h1>Your Posts</h1>
-      {userPosts &&
+    <div className="post-container">
+    { Boolean(userPosts) || <div><strong>You haven't Posted Yet</strong></div> }
+      {Boolean(userPosts) &&
         userPosts.map((item) => {
-          return <div key={item._id}>
-            <div>{item.title}</div>
-            <div>{item.author}</div>
-            <small>
+          return <div key={item._id} className="post">
+            <div className="post-title">{item.title}</div>
+            <div className="post-author">{item.author}</div>
+            <small className="post-creation">
               Posted on {(new Date(item.createdAt)).toLocaleDateString()}
             </small>
             <div>
-              <Link to={`/post/${item._id}`}>View post</Link>
+              <Link className="post-view" to={`/post/${item._id}`}>View post</Link>
             </div>
-            <hr />
           </div>
         })}
+    </div>
   </div>
+</main>
   );
 };
 

@@ -1,0 +1,22 @@
+.profile{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: 1px solid #ccc;
+  margin: 20px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.profile div{
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.profile .label {
+  border-right: 1px solid #ccc; 
+  background-color: #eee;
+}
+
+.profile .row-1{
+  border-bottom: 1px solid #ccc;
+}
