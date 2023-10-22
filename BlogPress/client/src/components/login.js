@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react";
-import {Link} from "react-router-dom"
+import {Link, Navigate} from "react-router-dom"
 import {AuthContext} from "../context/auth.context"
 
 function Login() {
@@ -29,6 +29,7 @@ function Login() {
     }).then((res) => res.json()).then((data)=>{
       storeItems(data.token);
       setresponse(data.message);
+      <Navigate to="/" />
     });
   };
   return (
