@@ -29,7 +29,10 @@ function Login() {
     }).then((res) => res.json()).then((data)=>{
       storeItems(data.token);
       setresponse(data.message);
-      window.location.reload();
+      if (!data.message){
+        window.location.reload();
+      }
+      
     })
   };
   return (
