@@ -9,6 +9,7 @@ function Navbar() {
         <ul>
           <li><Link to="/">BlogPress</Link></li>
           <li><Link to="/post/create">Create Post</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
           <li><button onClick={()=>logout()}>Logout</button></li>
         </ul>
       </nav>

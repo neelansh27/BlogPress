@@ -15,6 +15,7 @@ import Login from "./components/login";
 import { AuthProviderWrapper } from "./context/auth.context";
 import Restricted from "./components/restricted";
 import NotRestricted from "./components/notRestricted";
+import Profile from "./components/Profile";
 function App() {
   return (
     <AuthProviderWrapper>
@@ -44,6 +45,14 @@ function App() {
               element={
                 <Restricted>
                   <Post />
+                </Restricted>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Restricted>
+                <Profile/>              
                 </Restricted>
               }
             />

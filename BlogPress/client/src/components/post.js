@@ -48,7 +48,7 @@ export default function Post() {
             <div key={item._id}>
               <div>{item.title}</div>
               <div>{item.author}</div>
-              <div>{item.createdAt}</div>
+              <div>Posted on {(new Date(item.createdAt)).toLocaleDateString()}</div>
             <div>
               <Link to={`/post/${item._id}`}>View post</Link>
             </div>
