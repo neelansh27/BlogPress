@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import "../css/postView.css"
 export default function PostView() {
   const params = useParams();
   const [post, setPost] = useState(null);
@@ -41,35 +42,37 @@ export default function PostView() {
   return (
     <main>
       {!post || (
-        <div key={post._id}>
-          <h2>{post.title}</h2>
-          <small>By {post.author}</small>
-          <p>{post.content}</p>
-          <small>{post.createdAt}</small>
-          <hr />
-          <div className="commentbox">
+        <>
+        <div key={post._id} className="post-box">
+          <h1>{post.title}</h1>
+          <div className="post-author">By {post.author}</div>
+          <div className="post-creation">Posted on {(new Date(post.createdAt)).toLocaleDateString()}</div>
+          <div className="post-content">{post.content}</div>
+        </div>
+          <div className="comment-box">
             <textarea
               value={comment}
               onChange={handleInput}
               placeholder="Add Comment"
             ></textarea>
-            <div>
+            <div className="comment-btn">
               <button onClick={addComment}>Comment</button>
             </div>
           </div>
-        </div>
+        </>
       )}
-
+    <div className="comment-container">
+      {!post || (post.comments.length===0 && <div className="no-comments"><strong>No Comments</strong></div> )}
       {!post ||
         post.comments.slice().reverse().map((comment) => {
           return (
-            <div key={comment._id}>
-              <div>{comment.author}</div>
-              <p>{comment.content}</p>
-              <hr />
+            <div key={comment._id} className="comment">
+              <div className="comment-author">user &gt; {comment.author}</div>
+              <div>{comment.content}</div>
             </div>
           );
         })}
+    </div>
     </main>
   );
 }
