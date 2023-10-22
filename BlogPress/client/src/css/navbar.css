@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
+header{
+  height: 5vh;
+}
 nav{
   padding: 10px 0px;
   background-color: #F2F1F4;
