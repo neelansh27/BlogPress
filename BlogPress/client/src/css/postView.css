@@ -18,7 +18,7 @@ main {
 }
 .post-content{
   margin-bottom: 20px;
-  white-space: pre; 
+  white-space: pre-wrap; 
 }
 .comment-container{
   padding: 10px;
@@ -60,7 +60,7 @@ main {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
-  white-space: pre; 
+  white-space: pre-wrap; 
 }
 .comment-author{
   font-weight: bold;
