@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const [user, setuser] = useState(null);
 
   const storeItems = (token) => {
@@ -55,11 +55,13 @@ function AuthProviderWrapper(props) {
         });
     }
   },[])
-  return (
-    <AuthContext.Provider value={{ storeItems, isLoggedIn, loading, user,logout}}>
-      {props.children}
-    </AuthContext.Provider>
-  );
+  if (!loading){
+    return (
+      <AuthContext.Provider value={{ storeItems, isLoggedIn, loading, user,logout}}>
+        {props.children}
+      </AuthContext.Provider>
+    );
+  }
 }
 
 export { AuthContext, AuthProviderWrapper };

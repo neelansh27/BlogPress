@@ -29,8 +29,8 @@ function Login() {
     }).then((res) => res.json()).then((data)=>{
       storeItems(data.token);
       setresponse(data.message);
-      <Navigate to="/" />
-    });
+      window.location.reload();
+    })
   };
   return (
     <form onSubmit={handleSubmit}>
