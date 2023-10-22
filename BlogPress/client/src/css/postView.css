@@ -18,6 +18,7 @@ main {
 }
 .post-content{
   margin-bottom: 20px;
+  white-space: pre; 
 }
 .comment-container{
   padding: 10px;
@@ -31,6 +32,7 @@ main {
   border-bottom: 1px solid #000; 
   width: 100%; 
   box-sizing: border-box; 
+  font-size: 1.1rem;
   outline: none; 
   margin-bottom: 10px;
 }
@@ -58,6 +60,7 @@ main {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  white-space: pre; 
 }
 .comment-author{
   font-weight: bold;
