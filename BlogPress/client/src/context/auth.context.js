@@ -31,7 +31,7 @@ function AuthProviderWrapper(props) {
     window.location.reload()
   };
 
-  const authenticateUser = () => {
+  useEffect(()=>{
     const token = localStorage.getItem("token");
     if (!token || tokenExpired()) {
       setisLoggedIn(false);
@@ -44,7 +44,7 @@ function AuthProviderWrapper(props) {
         .then((res) => res.json())
         .then((res) => {
             setloading(false);
-            setuser(res.user);
+            setuser(res);
             setisLoggedIn(true);
         })
         .catch((err) => {
@@ -54,9 +54,6 @@ function AuthProviderWrapper(props) {
           setuser(null);
         });
     }
-  };
-  useEffect(()=>{
-    authenticateUser();
   },[])
   return (
     <AuthContext.Provider value={{ storeItems, isLoggedIn, loading, user,logout}}>
