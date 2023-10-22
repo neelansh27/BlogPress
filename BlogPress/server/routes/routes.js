@@ -120,8 +120,8 @@ router.post("/comment/add", (req, res) => {
       entry.comments.push(comment);
       entry
         .save()
-        .then(() => {
-          res.json({ status: "Added Comment Successfully" });
+        .then((post) => {
+          res.json(post);
         })
         .catch((err) => res.json(err));
     })
