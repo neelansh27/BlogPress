@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Post from "./components/post";
+import CreatePost from "./components/createPost";
 import PostView from "./components/PostView";
 import {
   BrowserRouter as Router,
@@ -43,6 +44,14 @@ function App() {
               element={
                 <Restricted>
                   <Post />
+                </Restricted>
+              }
+            />
+            <Route
+              path="/post/create"
+              element={
+                <Restricted>
+                <CreatePost/>              
                 </Restricted>
               }
             />
