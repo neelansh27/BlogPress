@@ -1,20 +1,20 @@
-import React, { useState,useContext } from "react";
-import {Link,useNavigate} from "react-router-dom"
-import {AuthContext} from "../context/auth.context"
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [response, setresponse] = useState("")
+  const [response, setresponse] = useState("");
   const { storeItems } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleEmail = (e) => {
     setemail(e.target.value);
   };
   const handlePassword = (e) => {
     setpassword(e.target.value);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/login", {
@@ -27,14 +27,15 @@ function Login() {
         email: email,
         password: password,
       }),
-    }).then((res) => res.json()).then((data)=>{
-      storeItems(data.token);
-      setresponse(data.message);
-      if (!data.message){
-        window.location.href = '/';
-      }
-      
     })
+      .then((res) => res.json())
+      .then((data) => {
+        storeItems(data.token);
+        setresponse(data.message);
+        if (!data.message) {
+          window.location.href = "/";
+        }
+      });
   };
   return (
     <div className="outerBox">
@@ -63,11 +64,15 @@ function Login() {
             />
           </div>
           <div className="auth-btn">
-            <button onClick={handleSubmit} type="submit">Submit</button>
+            <button onClick={handleSubmit} type="submit">
+              Submit
+            </button>
           </div>
-    <div className="link-text">
-          <Link to="/auth/register" className="auth-other">New Here? Register</Link>
-</div>
+          <div className="link-text">
+            <Link to="/auth/register" className="auth-other">
+              New Here? Register
+            </Link>
+          </div>
         </form>
       </div>
     </div>

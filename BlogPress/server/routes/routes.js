@@ -14,6 +14,10 @@ mongoose
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log(err));
 
+router.get("/",(req,res)=>{
+  res.json({status:"working"})
+})
+
 router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email }).then((entry) => {
     if (entry) {
