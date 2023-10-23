@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react";
-import {Link} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
 import {AuthContext} from "../context/auth.context"
 
 function Login() {
@@ -7,6 +7,7 @@ function Login() {
   const [password, setpassword] = useState("");
   const [response, setresponse] = useState("")
   const { storeItems } = useContext(AuthContext);
+  const navigate = useNavigate()
   const handleEmail = (e) => {
     setemail(e.target.value);
   };
@@ -30,7 +31,7 @@ function Login() {
       storeItems(data.token);
       setresponse(data.message);
       if (!data.message){
-        window.location.reload();
+        window.location.href = '/';
       }
       
     })
@@ -62,7 +63,7 @@ function Login() {
             />
           </div>
           <div className="auth-btn">
-            <button type="submit">Submit</button>
+            <button onClick={handleSubmit} type="submit">Submit</button>
           </div>
     <div className="link-text">
           <Link to="/auth/register" className="auth-other">New Here? Register</Link>

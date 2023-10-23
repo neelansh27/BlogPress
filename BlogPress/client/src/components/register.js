@@ -80,7 +80,7 @@ function Register() {
             <button type="submit">Submit</button>
           </div>
     <div className="link-text">
-          <Link to="/auth/login" className="auth-other">Already a User? Login</Link>
+          <Link onSubmit={handleSubmit} to="/auth/login" className="auth-other">Already a User? Login</Link>
 </div>
         </form>
       </div>

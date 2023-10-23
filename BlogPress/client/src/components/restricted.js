@@ -1,16 +1,15 @@
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import {AuthContext} from "../context/auth.context"
-import {Navigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 const Restricted = (props) => {
+  const navigate = useNavigate()
   const {isLoggedIn,loading} = useContext(AuthContext)
-  if (loading){
-    return <p>Loading...</p>
-  }
-  if (!isLoggedIn){
-    return <Navigate to="/auth/login"/>
-  } else {
-    return props.children;
-  }
+  useEffect(()=>{
+    if (!isLoggedIn && !loading){
+      navigate("/auth/login")
+    }
+  },[isLoggedIn,loading])
+  return props.children;
 }
 
 export default Restricted
