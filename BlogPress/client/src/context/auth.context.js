@@ -37,7 +37,7 @@ function AuthProviderWrapper(props) {
       setloading(false);
       setuser(null);
     } else {
-      fetch("http://localhost:3000/verify",{
+      fetch("https://blogpress-u5fv.onrender.com/verify",{
         headers: {token}
       })
         .then((res) => res.json())
