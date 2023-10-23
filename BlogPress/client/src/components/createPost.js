@@ -37,10 +37,10 @@ function CreatePost() {
     <div className="cp-container">
     <div className="cp-box">
       <div className="cp-input">
-        <input type="text" className="cp-heading" onChange={handleTitle} value={title} />
+        <input type="text" className="cp-heading" onChange={handleTitle} value={title} placeholder="Add title..." />
       </div>
       <div>
-        <textarea value={content} className="cp-content" onChange={handleContent}></textarea>
+        <textarea value={content} placeholder="Add content..." className="cp-content" onChange={handleContent}></textarea>
       </div>
       <button onClick={handleSubmit} className="cp-btn"> Post </button>
 </div>
