@@ -36,27 +36,40 @@ function Login() {
     })
   };
   return (
-    <form onSubmit={handleSubmit}>
-    <h1>Login</h1>
-    { !response || response}
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+    <div className="outerBox">
+      <div className="innerBox">
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <h1>Login</h1>
+          {!response || <div className="notify">{response}</div>}
+          <div className="row">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+              required
+            />
+          </div>
+          <div className="row">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePassword}
+              required
+            />
+          </div>
+          <div className="auth-btn">
+            <button type="submit">Submit</button>
+          </div>
+    <div className="link-text">
+          <Link to="/auth/register" className="auth-other">New Here? Register</Link>
+</div>
+        </form>
       </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    <Link to="/auth/register">New Here? Sign Up</Link>
-    </form>
+    </div>
   );
 }
 
