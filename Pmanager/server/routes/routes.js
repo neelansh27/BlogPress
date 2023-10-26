@@ -150,6 +150,37 @@ router.post("/task/add/comment", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.post("/task/add/assignee", (req, res) => {
+  Task.findById(req.body.tid)
+    .then((entry) => {
+      const assignee = {
+        id: req.body.id,
+        name: req.body.name,
+      };
+      entry.assignees.push(assignee);
+      entry.save().then((task) => {
+        res.json(task);
+      });
+    })
+    .catch((err) => res.json(err));
+});
+
+router.post("/task/unassign", (req, res) => {
+  Task.findById(req.body.tid)
+    .then((entry) => {
+      for (let i in entry.assignees) {
+        if (entry.assignees[i].id==req.body.uid){
+          entry.assignees.splice(i,1);
+          break;
+        }
+      }
+      entry.save().then((task) => {
+        res.json(task);
+      });
+    })
+    .catch((err) => res.json(err));
+});
+
 router.post("/task/status/change",(req,res) => {
   Task.findById(req.body.tid).then((task)=>{
     task.status=req.body.newStatus;
