@@ -77,7 +77,7 @@ const taskSchema = new mongoose.Schema({
 });
 
 const inviteSchema = new mongoose.Schema({
-  sender: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  sender: { type:String, required:true, },
   reciever: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -88,6 +88,10 @@ const inviteSchema = new mongoose.Schema({
     required: true,
     ref: "Project",
   },
+  projectName:{
+    type:String,
+    required: true,
+  }
 });
 
 const User = mongoose.model("User", userSchema);

@@ -74,6 +74,8 @@ router.post("/project/add", (req, res) => {
         name: req.body.name,
         description: req.body.description,
       });
+      entry.projects.push(newProject._id);
+      entry.save()
       newProject
         .save()
         .then(() => {
@@ -90,8 +92,20 @@ router.post("/project/add", (req, res) => {
 });
 
 router.get("/project/user/:id", (req, res) => {
-  Project.find({ ownerId: req.params.id }, "-ownerId -__v")
-    .sort({ createdAt: -1 })
+  User.findById(req.params.id).then((user)=>{
+    Project.find({ _id: {$in: user.projects}}, "-ownerId -__v")
+      .sort({ createdAt: -1 })
+      .then((project) => {
+        res.json(project);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  })
+});
+
+router.get("/project/:pid", (req, res) => {
+  Project.findById(req.params.pid)
     .then((project) => {
       res.json(project);
     })
@@ -100,14 +114,16 @@ router.get("/project/user/:id", (req, res) => {
     });
 });
 
-router.post("/project/status/change",(req,res) => {
-  Project.findById(req.body.pid).then((project)=>{
-    project.status=req.body.newStatus;
-    project.save().then((newProject)=>{
-      res.json(newProject);
+router.post("/project/status/change", (req, res) => {
+  Project.findById(req.body.pid)
+    .then((project) => {
+      project.status = req.body.newStatus;
+      project.save().then((newProject) => {
+        res.json(newProject);
+      });
     })
-  }).catch((err)=>res.json(err));
-})
+    .catch((err) => res.json(err));
+});
 // TASK MANAGEMENT ROUTES
 // Using project Id to add task
 router.post("/project/add/task", (req, res) => {
@@ -169,8 +185,8 @@ router.post("/task/unassign", (req, res) => {
   Task.findById(req.body.tid)
     .then((entry) => {
       for (let i in entry.assignees) {
-        if (entry.assignees[i].id==req.body.uid){
-          entry.assignees.splice(i,1);
+        if (entry.assignees[i].id == req.body.uid) {
+          entry.assignees.splice(i, 1);
           break;
         }
       }
@@ -181,14 +197,16 @@ router.post("/task/unassign", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.post("/task/status/change",(req,res) => {
-  Task.findById(req.body.tid).then((task)=>{
-    task.status=req.body.newStatus;
-    task.save().then((newTask)=>{
-      res.json(newTask);
+router.post("/task/status/change", (req, res) => {
+  Task.findById(req.body.tid)
+    .then((task) => {
+      task.status = req.body.newStatus;
+      task.save().then((newTask) => {
+        res.json(newTask);
+      });
     })
-  }).catch((err)=>res.json(err));
-})
+    .catch((err) => res.json(err));
+});
 
 // Invite handling routes
 router.post("/project/invite", (req, res) => {
@@ -197,6 +215,7 @@ router.post("/project/invite", (req, res) => {
       sender: req.body.sender,
       reciever: rec._id,
       projectId: req.body.pid,
+      projectName: req.body.pname,
     });
     newInvite
       .save()
@@ -220,15 +239,23 @@ router.get("/:id/invite", (req, res) => {
 });
 
 router.post("/project/invite/accept", (req, res) => {
-  Invite.findById(req.body.inviteId)
+  Invite.findOneAndDelete(req.body.inviteId)
     .then((invite) => {
-      if (!invite){
-        return res.status(400).json({message:"Error: Invite not found."})
+      if (!invite) {
+        return res.status(400).json({ message: "Error: Invite not found." });
       }
       Project.findById(invite.projectId).then((project) => {
-        project.members.push(invite.reciever);
-        project.save().then((entry) => {
-          res.json(entry);
+        User.findById(invite.reciever).then((entry) => {
+          const newMember = {
+            id: entry._id,
+            name: entry.username,
+          };
+          project.members.push(newMember);
+          entry.projects.push(invite.projectId)
+          entry.save()
+          project.save().then((entry) => {
+            res.json(entry);
+          });
         });
       });
     })
