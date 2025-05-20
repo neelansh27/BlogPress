@@ -9,7 +9,7 @@ export default function PostView() {
   const { user } = useContext(AuthContext);
 
   const addComment = () => {
-    fetch("https://blogpress-u5fv.onrender.com/comment/add", {
+    fetch("https://blogpress-i1to.onrender.com/comment/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -31,7 +31,7 @@ export default function PostView() {
     setComment(e.target.value);
   };
   useEffect(() => {
-    fetch("https://blogpress-u5fv.onrender.com/post/get/" + params.id)
+    fetch("https://blogpress-i1to.onrender.com/post/get/" + params.id)
       .then((response) => {
         return response.json();
       })

@@ -14,7 +14,7 @@ export default function Post() {
 
   function search() {
     fetch(
-      `https://blogpress-u5fv.onrender.com/post/getposts?page=${page}&search=${query}`
+      `https://blogpress-i1to.onrender.com/post/getposts?page=${page}&search=${query}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -22,7 +22,7 @@ export default function Post() {
       });
   }
   useEffect(() => {
-    fetch(`https://blogpress-u5fv.onrender.com/post/getposts?page=${page}`)
+    fetch(`https://blogpress-i1to.onrender.com/post/getposts?page=${page}`)
       .then((response) => {
         return response.json();
       })

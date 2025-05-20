@@ -18,7 +18,7 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://blogpress-u5fv.onrender.com/register", {
+    fetch("https://blogpress-i1to.onrender.com/register", {
       method: "post",
       headers: {
         Accept: "application/json",

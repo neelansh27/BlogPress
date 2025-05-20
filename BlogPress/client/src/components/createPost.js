@@ -16,7 +16,7 @@ function CreatePost() {
   };
   const handleSubmit = () => {
     
-    fetch("https://blogpress-u5fv.onrender.com/post/add", {
+    fetch("https://blogpress-i1to.onrender.com/post/add", {
       method: "post",
       headers: {
         Accept: "application/json",

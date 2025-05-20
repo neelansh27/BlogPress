@@ -17,7 +17,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://blogpress-u5fv.onrender.com/login", {
+    fetch("https://blogpress-i1to.onrender.com/login", {
       method: "post",
       headers: {
         Accept: "application/json",

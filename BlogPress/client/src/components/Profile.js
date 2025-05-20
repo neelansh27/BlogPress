@@ -6,7 +6,7 @@ const Profile = () => {
   const [userPosts, setUserPosts] = useState(null);
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch("https://blogpress-u5fv.onrender.com/post/user/" + user.id)
+    fetch("https://blogpress-i1to.onrender.com/post/user/" + user.id)
       .then((res) => res.json())
       .then((res) => {
           setUserPosts(res);
